@@ -78,7 +78,7 @@ public class EpisodeControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);
 
-        mockMvc.perform(request).andExpect(status().isBadRequest());
+        mockMvc.perform(request).andExpect(status().isNotFound());
     }
 
     @Test
@@ -95,7 +95,7 @@ public class EpisodeControllerTest {
     @Test
     @Transactional
     @Rollback
-    public void testGetShowWith400() throws Exception{
-        mockMvc.perform(get("/shows/543707/episodes")).andExpect(status().isBadRequest());
+    public void testGetShowWith404() throws Exception{
+        mockMvc.perform(get("/shows/543707/episodes")).andExpect(status().isNotFound());
     }
 }

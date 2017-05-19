@@ -1,5 +1,6 @@
 applications:
 - name: episodic-shows
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
   instances: 1
   memory: 512M
   disk_quota: 1024M

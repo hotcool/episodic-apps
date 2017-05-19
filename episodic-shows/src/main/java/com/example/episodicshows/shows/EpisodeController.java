@@ -37,9 +37,8 @@ public class EpisodeController {
             return new ResponseEntity<>(mapper.writeValueAsString(resultMap), HttpStatus.OK);
 
         } else {
-            return new ResponseEntity<>("Error! This episode is not in shows!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Error! This episode is not in shows!", HttpStatus.NOT_FOUND);
         }
-
     }
 
     @GetMapping("/{id}/episodes")
@@ -54,9 +53,8 @@ public class EpisodeController {
 
             return new ResponseEntity<>(mapper.writeValueAsString(episodesResult), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Error! This episode is not in shows!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Error! This episode is not in shows!", HttpStatus.NOT_FOUND);
         }
-
     }
 
     private Map<String, Object> getMapFromEpisode(Episode episode) {

@@ -37,7 +37,7 @@ public class UserControllerTest {
     public void setup() {
         userRepository.deleteAll();
 
-        user = new User(1L,"johnSmith@example.com");
+        user = new User("johnSmith@example.com");
 
         userRepository.save(user);
     }
