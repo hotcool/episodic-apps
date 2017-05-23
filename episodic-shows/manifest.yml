@@ -2,7 +2,7 @@ applications:
 - name: episodic-shows
   buildpack: https://github.com/cloudfoundry/java-buildpack.git
   instances: 1
-  memory: 512M
+  memory: 1024M
   disk_quota: 1024M
   routes:
     - route: episodic-shows-hao.cfapps.io

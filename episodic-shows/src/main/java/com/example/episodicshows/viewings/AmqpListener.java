@@ -20,7 +20,7 @@ public class AmqpListener implements RabbitListenerConfigurer {
         this.service = service;
     }
 
-    @RabbitListener(queues = "episodic-shows")
+    @RabbitListener(queues = "episodic-progress")
     @Transactional
     public void receiveMessage(final ViewingMessage message) {
         System.out.println("************************************************");
