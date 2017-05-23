@@ -11,4 +11,6 @@ public interface ViewingRepository extends CrudRepository<Viewing, Long> {
     //@Query(value = "SELECT * from viewings where user_id = ?1 order by updated_at desc", nativeQuery = true)
     List<Viewing> findAllByUserIdOrderByUpdatedAtDesc(long userId);
 
+    Viewing findByEpisodeIdAndUserId(long episodeId, long userId);
+
 }

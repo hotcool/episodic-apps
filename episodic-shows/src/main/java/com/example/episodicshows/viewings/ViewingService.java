@@ -80,7 +80,14 @@ public class ViewingService {
 
     public void updateViewing(ViewingMessage message) {
         if (userRepository.findOne(message.getUserId()) != null && episodeRepository.findOne(message.getEpisodeId()) != null) {
-            viewingRepository.save(getViewing(message));
+            Viewing viewing = viewingRepository.findByEpisodeIdAndUserId(message.getEpisodeId(), message.getUserId());
+            if (viewing == null) {
+                viewingRepository.save(getViewing(message));
+            }else {
+                viewing.setTimecode(message.getOffset());
+                viewing.setUpdatedAt(message.getCreatedAt());
+                viewingRepository.save(viewing);
+            }
         } else {
             return;
         }
