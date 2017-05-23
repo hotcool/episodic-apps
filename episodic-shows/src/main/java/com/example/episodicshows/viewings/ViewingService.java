@@ -4,13 +4,15 @@ import com.example.episodicshows.shows.Episode;
 import com.example.episodicshows.shows.EpisodeRepository;
 import com.example.episodicshows.shows.Show;
 import com.example.episodicshows.shows.ShowRepository;
+import com.example.episodicshows.users.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,12 +27,19 @@ public class ViewingService {
 
     private final ShowRepository showRepository;
 
+    private final UserRepository userRepository;
+
     private final ObjectMapper mapper;
 
-    public ViewingService(ViewingRepository viewingRepository, EpisodeRepository episodeRepository, ShowRepository showRepository, ObjectMapper mapper) {
+    public ViewingService(ViewingRepository viewingRepository,
+                          EpisodeRepository episodeRepository,
+                          ShowRepository showRepository,
+                          UserRepository userRepository,
+                          ObjectMapper mapper) {
         this.viewingRepository = viewingRepository;
         this.episodeRepository = episodeRepository;
         this.showRepository = showRepository;
+        this.userRepository = userRepository;
         this.mapper = mapper;
     }
 
@@ -67,6 +76,22 @@ public class ViewingService {
 
             return new ResponseEntity<>(mapper.writeValueAsString(result), HttpStatus.OK);
         }
+    }
+
+    public void updateViewing(ViewingMessage message) {
+        if (userRepository.findOne(message.getUserId()) != null && episodeRepository.findOne(message.getEpisodeId()) != null) {
+            viewingRepository.save(getViewing(message));
+        } else {
+            return;
+        }
+    }
+
+    private Viewing getViewing(ViewingMessage message) {
+        return new Viewing(episodeRepository.findOne(message.getEpisodeId()).getShowId(),
+                message.getUserId(),
+                message.getEpisodeId(),
+                LocalDateTime.ofInstant(message.getCreatedAt().toInstant(), ZoneId.systemDefault()),
+                message.getOffset());
     }
 
 }
