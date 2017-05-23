@@ -2,7 +2,7 @@ package com.example.episodicshows.viewings;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,7 +13,7 @@ public class ViewingMessage {
 
     private Long userId;
     private Long episodeId;
-    private Date createdAt;
+    private LocalDateTime createdAt;
     private int offset;
 
 }

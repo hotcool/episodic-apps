@@ -1,5 +1,6 @@
 package com.example.episodicshows.viewings;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
@@ -16,8 +17,11 @@ public class AmqpListener implements RabbitListenerConfigurer {
 
     private final ViewingService service;
 
-    public AmqpListener(ViewingService service) {
+    private final ObjectMapper mapper;
+
+    public AmqpListener(ViewingService service, ObjectMapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
     @RabbitListener(queues = "episodic-progress")
@@ -32,7 +36,9 @@ public class AmqpListener implements RabbitListenerConfigurer {
     @Bean
     public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
         DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
-        factory.setMessageConverter(new MappingJackson2MessageConverter());
+        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        converter.setObjectMapper(mapper);
+        factory.setMessageConverter(converter);
         return factory;
     }
 

@@ -90,7 +90,7 @@ public class ViewingService {
         return new Viewing(episodeRepository.findOne(message.getEpisodeId()).getShowId(),
                 message.getUserId(),
                 message.getEpisodeId(),
-                LocalDateTime.ofInstant(message.getCreatedAt().toInstant(), ZoneId.systemDefault()),
+                message.getCreatedAt(),
                 message.getOffset());
     }
 
