@@ -1,6 +1,5 @@
 package com.example.episodicshows.users;
 
-import com.example.episodicshows.MyTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc(secure = false)
 @SpringBootTest
-public class UserControllerTest extends MyTestBaseClass {
+public class UserControllerTest {
 
     @Autowired
     private UserRepository userRepository;
