@@ -32,6 +32,7 @@ dependencies {
     compile("org.springframework.amqp:spring-rabbit-junit:1.7.2.RELEASE")
 	//compile('org.springframework.boot:spring-boot-starter-hateoas')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0.pr3')
+    compile('io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry:1.4.1.RELEASE')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
