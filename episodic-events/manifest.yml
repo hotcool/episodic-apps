@@ -1,7 +1,7 @@
 applications:
 - name: episodic-events
   instances: 1
-  memory: 512M
+  memory: 1024M
   disk_quota: 1024M
   routes:
   - route: episodic-events.cfapps.io
