@@ -1,6 +1,5 @@
 package com.example.episodicevents.events;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,26 +12,26 @@ import java.util.List;
 @RestController
 public class EventsController {
 
-    private final EventRepository eventRepository;
-    private final ObjectMapper objectMapper;
+    private final EventService eventService;
 
-    public EventsController(EventRepository eventRepository, ObjectMapper objectMapper) {
-        this.eventRepository = eventRepository;
-        this.objectMapper = objectMapper;
+    public EventsController(EventService eventService) {
+        this.eventService = eventService;
     }
 
     @PostMapping()
     public ResponseEntity<String> postEvents(@RequestBody Event event) {
-        eventRepository.save(event);
+        eventService.insertEvent(event);
+
+        eventService.publishEvent(event);
 
         //event.add(linkTo(methodOn(EventsController.class).postEvents(event)).withSelfRel());
 
-        return new ResponseEntity<String>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/recent")
     public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+        return eventService.findAllEvents();
     }
 
 }

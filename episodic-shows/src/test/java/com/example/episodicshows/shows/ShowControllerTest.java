@@ -35,7 +35,7 @@ public class ShowControllerTest extends MyTestBaseClass {
     private Show show;
 
     @Before
-    public void setup(){
+    public void setup() {
         showRepository.deleteAll();
 
         show = new Show(1L, "name");
@@ -46,7 +46,7 @@ public class ShowControllerTest extends MyTestBaseClass {
     @Test
     @Transactional
     @Rollback
-    public void testPostShow() throws Exception{
+    public void testPostShow() throws Exception {
         MockHttpServletRequestBuilder request = post("/shows")
                 .content("{\"name\": \"lol\"}")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -60,7 +60,7 @@ public class ShowControllerTest extends MyTestBaseClass {
     @Test
     @Transactional
     @Rollback
-    public void testGetShow() throws Exception{
+    public void testGetShow() throws Exception {
         mockMvc.perform(get("/shows")).andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").exists())
                 .andExpect(jsonPath("$[0].name", is("name")));

@@ -43,4 +43,8 @@ public class Event {
         this.episodeId = episodeId;
         this.createdAt = createdAt;
     }
+
+    public String getMessageType(){
+        return null;
+    }
 }

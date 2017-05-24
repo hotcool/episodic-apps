@@ -40,15 +40,15 @@ public class EpisodeControllerTest extends MyTestBaseClass {
     private Episode episode;
 
     @Before
-    public void setup(){
+    public void setup() {
         showRepository.deleteAll();
         episodeRepository.deleteAll();
 
-        show = new Show( "name");
+        show = new Show("name");
 
         showRepository.save(show);
 
-        episode = new Episode(show.getId(), 2,3);
+        episode = new Episode(show.getId(), 2, 3);
 
         episodeRepository.save(episode);
     }
@@ -56,7 +56,7 @@ public class EpisodeControllerTest extends MyTestBaseClass {
     @Test
     @Transactional
     @Rollback
-    public void testPostShow() throws Exception{
+    public void testPostShow() throws Exception {
         MockHttpServletRequestBuilder request = post(String.format("/shows/%d/episodes", show.getId()))
                 .content("{\"seasonNumber\": 1,\"episodeNumber\": 2}")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -73,7 +73,7 @@ public class EpisodeControllerTest extends MyTestBaseClass {
     @Test
     @Transactional
     @Rollback
-    public void testPostShowWith400() throws Exception{
+    public void testPostShowWith400() throws Exception {
         MockHttpServletRequestBuilder request = post("/shows/5432/episodes")
                 .content("{\"seasonNumber\": 1,\"episodeNumber\": 2}")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -85,7 +85,7 @@ public class EpisodeControllerTest extends MyTestBaseClass {
     @Test
     @Transactional
     @Rollback
-    public void testGetShow() throws Exception{
+    public void testGetShow() throws Exception {
         mockMvc.perform(get(String.format("/shows/%d/episodes", show.getId()))).andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").exists())
                 .andExpect(jsonPath("$[0].seasonNumber", is(2)))
@@ -96,7 +96,7 @@ public class EpisodeControllerTest extends MyTestBaseClass {
     @Test
     @Transactional
     @Rollback
-    public void testGetShowWith404() throws Exception{
+    public void testGetShowWith404() throws Exception {
         mockMvc.perform(get("/shows/543707/episodes")).andExpect(status().isNotFound());
     }
 }

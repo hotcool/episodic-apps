@@ -19,7 +19,7 @@ public class FastForwardEvent extends Event{
         this.data = data;
     }
 
-    public String getType() {
+    public String getMessageType() {
         return "fastForward";
     }
 }

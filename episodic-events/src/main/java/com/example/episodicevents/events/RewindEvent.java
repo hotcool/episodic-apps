@@ -19,7 +19,7 @@ public class RewindEvent extends Event {
         this.data = data;
     }
 
-    public String getType() {
+    public String getMessageType() {
         return "rewind";
     }
 }

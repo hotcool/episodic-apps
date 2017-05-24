@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc(secure = false)
-public class EventsControllerTest {
+public class EventsControllerTest extends MyTestBaseClass{
 
     @Autowired
     private MockMvc mockMvc;

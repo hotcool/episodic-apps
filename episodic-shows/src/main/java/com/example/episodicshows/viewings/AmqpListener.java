@@ -24,7 +24,7 @@ public class AmqpListener implements RabbitListenerConfigurer {
         this.mapper = mapper;
     }
 
-    @RabbitListener(queues = "episodic-progress")
+    @RabbitListener(queues = "my-publish-queue")
     @Transactional
     public void receiveMessage(final ViewingMessage message) {
         System.out.println("************************************************");
