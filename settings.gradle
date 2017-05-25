@@ -1,1 +1,1 @@
-include 'episodic-shows','episodic-events'
+include 'episodic-shows','episodic-events', 'episodic-gateway'
