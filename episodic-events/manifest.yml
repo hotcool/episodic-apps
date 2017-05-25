@@ -7,6 +7,7 @@ applications:
   - route: episodic-events.cfapps.io
   services:
   - episodic-events-db
+  - episodic-queue
   - service-registry
   - config-server
   stack: cflinuxfs2
